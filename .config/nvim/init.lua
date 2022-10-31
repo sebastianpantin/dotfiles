@@ -1,0 +1,33 @@
+vim.g.python3_host_prog = vim.env.PYENV_ROOT .. '/shims/python3'
+require("user.plugins.impatient")
+-- Root
+require("user.plugins_setup")
+require("user.plugins.catppuccin")
+
+-- Core stuff
+require("user.core.options")
+require("user.core.keymaps")
+require("user.core.colorscheme")
+
+-- Plugin confs
+require("user.plugins.icons")
+require("user.plugins.nvim-tree")
+require("user.plugins.comment")
+require("user.plugins.whichkey")
+require("user.plugins.lualine")
+require("user.plugins.telescope")
+require("user.plugins.lsp.mason")
+require("user.plugins.lsp.lspsaga")
+require("user.plugins.lsp.lspconfig")
+require("user.plugins.lsp.null-ls")
+require("user.plugins.nvim-cmp")
+require("user.plugins.alpha")
+require("user.plugins.treesitter")
+require("user.plugins.autopairs")
+require("user.plugins.bufferline")
+require("user.plugins.colorizer")
+require("user.plugins.gitsigns")
+require("user.plugins.surround")
+require("user.plugins.project")
+require("user.plugins.fidget")
+require("user.plugins.indent-blankline")
