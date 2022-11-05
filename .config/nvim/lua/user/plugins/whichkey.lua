@@ -73,7 +73,7 @@ local mappings = {
 	w = { "<cmd>w<CR>", "Write" },
 	q = { '<cmd>lua require("user.core.functions").smart_quit()<CR>', "Quit" },
 	["/"] = { '<cmd>lua require("Comment.api").toggle.linewise.current()<CR>', "Comment" },
-	c = { "<cmd>bdelete!<CR>", "Close Buffer" },
+	c = { "<cmd>Bdelete!<CR>", "Close Buffer" },
 
   P = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 

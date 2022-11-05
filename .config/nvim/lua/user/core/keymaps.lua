@@ -17,6 +17,7 @@ vim.g.maplocalleader = " "
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "Q", "<cmd>Bdelete!<CR>", opts)
 
 -- Move text
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)

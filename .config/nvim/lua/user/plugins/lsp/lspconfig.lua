@@ -97,6 +97,12 @@ lspconfig["jedi_language_server"].setup({
 	on_attach = on_attach
 })
 
+-- configure terraform ls
+lspconfig["terraformls"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
 -- configure html server
 lspconfig["html"].setup({
 	capabilities = capabilities,
@@ -109,6 +115,12 @@ typescript.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 	},
+})
+
+-- configure csharp_ls
+lspconfig["csharp_ls"].setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
 })
 
 -- configure css server

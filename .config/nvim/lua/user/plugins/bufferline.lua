@@ -6,6 +6,9 @@ end
 bufferline.setup({
 	options = {
 		numbers = "none",
+		close_command = "Bdelete! %d",
+		right_mouse_command = "Bdelete! %d",
+		left_mouse_command = "buffer %d",
 		indicator = { icon = "│" },
 		buffer_close_icon = "",
 		modified_icon = "●",

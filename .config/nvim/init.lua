@@ -10,6 +10,8 @@ require("user.core.keymaps")
 require("user.core.colorscheme")
 
 -- Plugin confs
+require("user.plugins.autocommands")
+require("user.plugins.dressing")
 require("user.plugins.icons")
 require("user.plugins.nvim-tree")
 require("user.plugins.comment")
@@ -31,3 +33,4 @@ require("user.plugins.surround")
 require("user.plugins.project")
 require("user.plugins.fidget")
 require("user.plugins.indent-blankline")
+require("user.plugins.todo-comments")

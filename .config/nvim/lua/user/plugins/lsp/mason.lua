@@ -22,6 +22,7 @@ local lsp_servers = {
   "yamlls",
   "pyright",
   "jedi_language_server",
+  "terraformls",
 }
 
 local settings = {

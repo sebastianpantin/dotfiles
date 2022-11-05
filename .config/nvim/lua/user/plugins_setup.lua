@@ -55,7 +55,7 @@ return packer.startup(function(use)
 	use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
 	use("j-hui/fidget.nvim")
 	use("jose-elias-alvarez/typescript.nvim") -- additional functionality for typescript server (e.g. rename file & update imports)
-	use("petobens/poet-v")
+	-- use("petobens/poet-v")
 
 	-- Formatting & linting
 	use("jose-elias-alvarez/null-ls.nvim")
@@ -88,8 +88,6 @@ return packer.startup(function(use)
 	use({ "hrsh7th/cmp-buffer", after = "cmp-nvim-lsp" }) -- buffer completions
 	use({ "hrsh7th/cmp-path", after = "cmp-buffer" }) -- path completions
 
-	-- Snippet
-
 	-- Treesitter
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -112,12 +110,13 @@ return packer.startup(function(use)
 	-- Icons
 	use("kyazdani42/nvim-web-devicons")
 
-	-- Bufferline
+	-- Buffers
 	use({
 		"akinsho/bufferline.nvim",
 		tag = "v3.*",
 		requires = "kyazdani42/nvim-web-devicons",
 	})
+	use("moll/vim-bbye")
 
 	-- Status line
 	use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons", opt = true } })
@@ -150,7 +149,6 @@ return packer.startup(function(use)
 
 	-- Indent line
 	use("lukas-reineke/indent-blankline.nvim")
-
 	use({
 		"nmac427/guess-indent.nvim",
 		config = function()
@@ -159,7 +157,10 @@ return packer.startup(function(use)
 	})
 
 	-- Keybinding
-	use({ "folke/which-key.nvim" })
+	use("folke/which-key.nvim")
+
+	-- UI
+	use("stevearc/dressing.nvim")
 
 	if packer_bootstrap then
 		require("packer").sync()
