@@ -25,6 +25,7 @@ set -g fish_color_search_match 'bryellow'  '--background=brblack'
 set -g fish_color_selection 'white'  '--bold'  '--background=brblack'
 set -g fish_color_user brgreen
 set -g fish_color_valid_path --underline
+set --universal nvm_default_version v18.12.1
 
 set -Ux EDITOR nvim
 
@@ -37,6 +38,7 @@ status --is-interactive; and source (rbenv init -|psub)
 set -gx COMPOSE_DOCKER_CLI_BUILD 1
 set -gx DOCKER_BUILDKIT 1
 
+set -gx PATH "$HOME/.cargo/bin" $PATH
 set -x PATH $PATH /usr/local/go/bin
 set -x PATH $PATH $HOME/.pub-cache/bin
 set -x GOPATH $GOPATH $HOME/go

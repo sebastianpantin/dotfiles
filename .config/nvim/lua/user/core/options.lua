@@ -108,5 +108,14 @@ local default_plugins = {
 }
 
 for _, plugin in pairs(default_plugins) do
-	vim.g["loaded_" .. plugin] = 1
+	vim.g["loaded_" .. plugin] = 0
+end
+
+local disabled_providers = {
+	"perl_provider",
+	"ruby_provider"
+}
+
+for _, provider in pairs(disabled_providers) do
+	vim.g["loaded_" .. provider] = 0
 end
