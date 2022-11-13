@@ -38,6 +38,8 @@ status --is-interactive; and source (rbenv init -|psub)
 set -gx COMPOSE_DOCKER_CLI_BUILD 1
 set -gx DOCKER_BUILDKIT 1
 
+set -gx NODE_OPTIONS --openssl-legacy-provider
+
 set -gx PATH "$HOME/.cargo/bin" $PATH
 set -x PATH $PATH /usr/local/go/bin
 set -x PATH $PATH $HOME/.pub-cache/bin
