@@ -15,12 +15,12 @@ null_ls.setup({
 		--  "formatting.prettier.with({disabled_filetypes: {}})" (see null-ls docs)
 		formatting.prettier, -- js/ts formatter
 		formatting.stylua, -- lua formatter
-		formatting.black.with({ extra_args = { "--fast" } }),
+		formatting.black,
 		diagnostics.eslint_d.with({ -- js/ts linter
 			condition = function(utils)
 				return utils.root_has_file(".eslintrc.js") -- change file extension if you use something else
 			end,
 		}),
-		diagnostics.flake8.with({ extra_args = { "--config=python/projects/zombie-api/.flake8" }}),
+		diagnostics.flake8.with({ prefer_local = ".venv/bin" }),
 	},
 })
