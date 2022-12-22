@@ -4,10 +4,10 @@ if not status_ok then
 end
 
 catppuccin.setup({
-	flavour = "frappe", -- latte, frappe, macchiato, mocha
+	flavour = "macchiato", -- latte, frappe, macchiato, mocha
 	background = { -- :h background
 		light = "latte",
-		dark = "frappe",
+		dark = "macchiato",
 	},
 	compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
 	dim_inactive = {
