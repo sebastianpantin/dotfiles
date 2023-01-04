@@ -1,10 +1,10 @@
 local M = {
-	"folke/which-key.nvim",
-	event = "VeryLazy",
+  "folke/which-key.nvim",
+  event = "VeryLazy",
 }
 
 M.config = function()
-  local wk  = require("which-key")
+  local wk = require("which-key")
   local config = {
     setup = {
       plugins = {
@@ -71,7 +71,7 @@ M.config = function()
       buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
       silent = true, -- use `silent` when creating keymaps
       noremap = true, -- use `noremap` when creating keymaps
-      nowait = true, -- use `nowait` when creating keymaps 
+      nowait = true, -- use `nowait` when creating keymaps
     },
     vmappings = {
       ["/"] = { '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>', "Comment" },
@@ -91,12 +91,15 @@ M.config = function()
       P = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
 
       p = {
-        name = "Packer",
-        c = { "<cmd>PackerCompile<cr>", "Compile" },
-        i = { "<cmd>PackerInstall<cr>", "Install" },
-        s = { "<cmd>PackerSync<cr>", "Sync" },
-        S = { "<cmd>PackerStatus<cr>", "Status" },
-        u = { "<cmd>PackerUpdate<cr>", "Update" },
+        name = "Plugins",
+        i = { "<cmd>Lazy install<cr>", "Install" },
+        s = { "<cmd>Lazy sync<cr>", "Sync" },
+        S = { "<cmd>Lazy clear<cr>", "Status" },
+        c = { "<cmd>Lazy clean<cr>", "Clean" },
+        u = { "<cmd>Lazy update<cr>", "Update" },
+        p = { "<cmd>Lazy profile<cr>", "Profile" },
+        l = { "<cmd>Lazy log<cr>", "Log" },
+        d = { "<cmd>Lazy debug<cr>", "Debug" },
       },
 
       f = {
@@ -172,7 +175,7 @@ M.config = function()
         p = { "<cmd>TSPlaygroundToggle<cr>", "Playground" },
         r = { "<cmd>TSToggle rainbow<cr>", "Rainbow" },
       },
-    }
+    },
   }
   wk.setup(config.setup)
   wk.register(config.mappings, config.opts)
