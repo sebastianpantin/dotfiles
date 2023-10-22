@@ -1,0 +1,28 @@
+layout {
+    tab focus=true split_direction="Vertical" {
+        pane split_direction="Vertical" {
+            pane split_direction="Horizontal" {
+                pane name="Database" command="fish" {
+                    args "-C" "cd ~/Programming/Captario-SUM && docker-compose up sqlserver"
+                }
+                pane name="Dotnet backend" command="fish" {
+                    args "-C" "cd ~/Programming/Captario-SUM && dotnet run --project api/src/Captario.Sum.Host.Core/Captario.Sum.Host.Core.csproj"
+                }
+            }
+            pane split_direction="Horizontal" {
+                pane name="Frontend" command="fish" {
+                    args "-C" "cd ~/Programming/Captario-SUM/client && npm run start"
+                }
+                pane name="SUMBI backend" command="fish" {
+                    args "-C" "cd ~/Programming/Captario-SUM/python/projects/zombie-api && PROD=False SIMULATION_DATA_PATH=/home/sebastianpantinliljevall/sumdata/000000000000000000000001/sim DISABLE_CACHE=true poetry run poe start-reload"
+                }
+            }
+        }
+    }
+    default_tab_template {
+        children
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+}
