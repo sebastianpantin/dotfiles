@@ -1,0 +1,18 @@
+
+font_family           FiraCode Nerd Font Mono
+italic_font           FiraCode Nerd Font Mono
+bold_font             FiraCode Nerd Font Mono
+bold_italic_font      FiraCode Nerd Font Mono 
+
+symbol_map U+f101-U+f22a nonicons
+symbol_map U+ea60-U+ebff codicon
+
+
+enable_audio_bell no
+
+
+
+# BEGIN_KITTY_THEME
+# Catppuccin-Frappe
+include current-theme.conf
+# END_KITTY_THEME
