@@ -10,11 +10,10 @@ M.tmux_keybinds = {
 	--- Tabs
 	{ key = "h", mods = "ALT", action = act({ ActivateTabRelative = -1 }) },
 	{ key = "l", mods = "ALT", action = act({ ActivateTabRelative = 1 }) },
-	{ key = "t", mods = "LEADER", action = act.ActivateKeyTable {
-			name = "tab",
-			one_shot = true,
-		}
-	},
+	{ key = "t", mods = "LEADER", action = act.ActivateKeyTable({
+		name = "tab",
+		one_shot = true,
+	}) },
 
 	--- Panes
 	{ key = "n", mods = "ALT", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
@@ -24,14 +23,13 @@ M.tmux_keybinds = {
 	{ key = "l", mods = "ALT|SHIFT", action = act({ ActivatePaneDirection = "Right" }) },
 	{ key = "k", mods = "ALT|SHIFT", action = act({ ActivatePaneDirection = "Up" }) },
 	{ key = "j", mods = "ALT|SHIFT", action = act({ ActivatePaneDirection = "Down" }) },
-
 }
 
 M.key_tables = {
 	tab = {
 		{ key = "n", action = act({ SpawnTab = "CurrentPaneDomain" }) },
 		{ key = "x", action = act.CloseCurrentTab({ confirm = true }) },
-	}
+	},
 }
 
 function M.create_keybinds()
