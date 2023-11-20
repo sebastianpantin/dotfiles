@@ -57,7 +57,7 @@ local config = {
 	hide_tab_bar_if_only_one_tab = true,
 	show_new_tab_button_in_tab_bar = false,
 	allow_win32_input_mode = true,
-	disable_default_key_bindings = true,
+	disable_default_key_bindings = false,
 }
 
 return config
