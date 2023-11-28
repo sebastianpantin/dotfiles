@@ -2,7 +2,7 @@
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
 SETUVAR --export PYENV_ROOT:/home/sebastianpantinliljevall/\x2epyenv
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_cda:zoxide\x20add
 SETUVAR _fish_abbr_cdq:zoxide\x20query
 SETUVAR _fish_abbr_cdqi:zoxide\x20query\x20\x2di
@@ -58,6 +58,6 @@ SETUVAR fish_pager_color_selected_background:\x1d
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/sebastianpantinliljevall/\x2elocal/share/bob/nvim\x2dbin\x1e/home/sebastianpantinliljevall/\x2elocal/bin\x1e/home/sebastian/\x2epyenv/bin\x1e/home/sebastianpantinliljevall/\x2epyenv/bin\x1e/home/sebastianpantinliljevall/\x2espicetify
+SETUVAR fish_user_paths:/home/sebastianpantinliljevall/\x2elocal/share/bob/nvim\x2dbin\x1e/home/sebastianpantinliljevall/\x2elocal/bin\x1e/home/sebastian/\x2epyenv/bin\x1e/home/sebastianpantinliljevall/\x2epyenv/bin\x1e/home/sebastianpantinliljevall/\x2espicetify\x1e/home/sebastianpantinliljevall/\x2efzf/bin
 SETUVAR nvm_default_version:v18\x2e12\x2e1
 SETUVAR zoxide_cmd:j
