@@ -10,9 +10,10 @@ export ZSH="$HOME/.config/.oh-my-zsh"
 
 # Theme
 ZSH_THEME=""
+source $ZSH/custom/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 
 # Plugins
-plugins=(git zsh-nvm)
+plugins=(git zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Init different stuff
@@ -28,5 +29,8 @@ alias ls='exa -l'
 # Env vars
 export COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_BUILDKIT=1
+
+# other stuff
+source <(devspace completion zsh)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
