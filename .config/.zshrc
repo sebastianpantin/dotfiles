@@ -7,10 +7,11 @@ export PATH=$HOME/.local/share/bob/nvim-bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/.oh-my-zsh"
+export ZSH_CUSTOM="$HOME/.config/zsh-custom"
 
 # Theme
 ZSH_THEME=""
-source $ZSH/custom/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+source $ZSH_CUSTOM/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 
 # Plugins
 plugins=(git zsh-nvm zsh-autosuggestions zsh-syntax-highlighting)
