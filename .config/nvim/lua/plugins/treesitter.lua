@@ -6,6 +6,8 @@ return {
         "help",
       },
       ensure_installed = {
+        "c_sharp",
+        "graphql",
         "bash",
         "html",
         "javascript",
