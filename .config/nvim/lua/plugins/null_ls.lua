@@ -1,6 +1,9 @@
 return {
   {
     "nvimtools/none-ls.nvim",
+    dependencies = {
+      "nvimtools/none-ls-extras.nvim",
+    },
     opts = function()
       local nls = require("null-ls")
       local formatting = nls.builtins.formatting -- to setup formatters
@@ -14,22 +17,7 @@ return {
           }),
           formatting.yamlfix,
           formatting.stylua,
-          formatting.black.with({ prefer_local = ".venv/bin" }),
-          diagnostics.eslint_d.with({
-            condition = function(utils)
-              return utils.root_has_file(".eslintrc.js")
-            end,
-          }),
           diagnostics.mypy.with({ prefer_local = ".venv/bin" }),
-          diagnostics.flake8.with({
-            condition = function(utils)
-              return utils.root_has_file(".flake8")
-            end,
-            prefer_local = ".venv/bin",
-          }),
-          diagnostics.ruff.with({
-            prefer_local = ".venv/bin",
-          }),
         },
         debug = true,
       }
