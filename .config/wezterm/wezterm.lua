@@ -25,8 +25,8 @@ local config = {
 
 	initial_cols = 117,
 	initial_rows = 32,
-	font = term.font("FiraCode Nerd Font"),
-	font_size = 12,
+	font = term.font("IosevkaTerm Nerd Font"),
+	font_size = 14,
 	window_decorations = "RESIZE",
 	text_background_opacity = 1.0,
 	window_background_opacity = 1,

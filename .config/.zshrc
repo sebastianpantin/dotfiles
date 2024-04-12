@@ -26,6 +26,8 @@ eval "$(pyenv init -)"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cat='bat'
 alias ls='exa -l'
+alias random-tag='(echo $RANDOM | md5sum | head -c 20)'
+alias force-build='(devspace deploy --var BUILD_NAME=$(random-tag) --force-build)'
 
 # Env vars
 export COMPOSE_DOCKER_CLI_BUILD=1
