@@ -1,3 +1,14 @@
+local servers = {
+	"lua_ls",
+	"pylsp",
+	"ruff_lsp",
+	"csharp_ls",
+	"dockerls",
+	"terraformls",
+	"yamlls",
+	"fsautocomplete",
+}
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -6,7 +17,6 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			{
 				"j-hui/fidget.nvim",
-				tag = "legacy",
 				event = "LspAttach",
 			},
 			"folke/neodev.nvim",
@@ -17,16 +27,7 @@ return {
 			-- Set up Mason before anything else
 			require("mason").setup()
 			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"lua_ls",
-					"pylsp",
-					"ruff_lsp",
-					"csharp_ls",
-					"dockerls",
-					"terraformls",
-					"yamlls",
-					"fsautocomplete",
-				},
+				ensure_installed = servers,
 				automatic_installation = true,
 			})
 
@@ -59,7 +60,7 @@ return {
 			})
 
 			-- Set up cool signs for diagnostics
-			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 			for type, icon in pairs(signs) do
 				local hl = "DiagnosticSign" .. type
 				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -71,7 +72,7 @@ return {
 				signs = {
 					active = signs,
 				},
-				update_in_insert = true,
+				update_in_insert = false,
 				underline = true,
 				severity_sort = true,
 				float = {
@@ -87,6 +88,9 @@ return {
 
 			-- This function gets run when an LSP connects to a particular buffer.
 			local on_attach = function(client, bufnr)
+				if client.name == "ruff_lsp" then
+					client.server_capabilities.hoverProvider = false
+				end
 				local lsp_map = require("helpers.keys").lsp_map
 
 				lsp_map("<leader>cr", vim.lsp.buf.rename, bufnr, "Rename symbol")
@@ -115,48 +119,26 @@ return {
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-			-- Lua
-			require("lspconfig")["lua_ls"].setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						completion = {
-							callSnippet = "Replace",
-						},
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							library = {
-								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-								[vim.fn.stdpath("config") .. "/lua"] = true,
-							},
-						},
-					},
-				},
-			})
+			local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
+			if not lspconfig_status_ok then
+				return
+			end
 
-			-- Python
-			require("lspconfig")["pylsp"].setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					pylsp = {
-						plugins = {
-							ruff = { enabled = false },
-							autopep8 = { enabled = false },
-							flake8 = { enabled = false },
-							mccabe = { enabled = false },
-							pycodestyle = { enabled = false },
-							pydocstyle = { enabled = false },
-							pyflakes = { enabled = false },
-							pylint = { enabled = false },
-							yapf = { enabled = false },
-						},
-					},
-				},
-			})
+			for _, server in pairs(servers) do
+				local opts = {
+					on_attach = on_attach,
+					capabilities = capabilities,
+				}
+
+				server = vim.split(server, "@")[1]
+
+				local require_ok, conf_opts = pcall(require, "plugins.lspsettings." .. server)
+				if require_ok then
+					opts = vim.tbl_deep_extend("force", conf_opts, opts)
+				end
+
+				lspconfig[server].setup(opts)
+			end
 		end,
 	},
 }
