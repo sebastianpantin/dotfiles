@@ -7,6 +7,8 @@ local servers = {
 	"terraformls",
 	"yamlls",
 	"fsautocomplete",
+	"vtsls",
+	"eslint",
 }
 
 return {
@@ -68,7 +70,9 @@ return {
 
 			-- Diagnostic config
 			local config = {
-				virtual_text = false,
+				virtual_text = {
+					source = true,
+				},
 				signs = {
 					active = signs,
 				},
@@ -92,6 +96,7 @@ return {
 					client.server_capabilities.hoverProvider = false
 				end
 				local lsp_map = require("helpers.keys").lsp_map
+				local lsp_utils = require("plugins.lspsettings.utils")
 
 				lsp_map("<leader>cr", vim.lsp.buf.rename, bufnr, "Rename symbol")
 				lsp_map("<leader>ca", vim.lsp.buf.code_action, bufnr, "Code action")
@@ -110,6 +115,14 @@ return {
 				end, { desc = "Format current buffer with LSP" })
 
 				lsp_map("<leader>cf", "<cmd>Format<cr>", bufnr, "Format")
+
+				if client.name == "vtsls" then
+					local ts_mappings = lsp_utils.generate_ts_mappings(client.name)
+					lsp_map("gd", ts_mappings.go_to_source_definition, bufnr, "Goto Definition")
+					lsp_map("mi", ts_mappings.add_missing_imports, bufnr, "Add missing imports")
+					lsp_map("oi", ts_mappings.organize_imports, bufnr, "Organize imports")
+					lsp_map("ri", ts_mappings.remove_unused_imports, bufnr, "Remove unused imports")
+				end
 
 				-- Attach and configure vim-illuminate
 				require("illuminate").on_attach(client)
@@ -140,5 +153,15 @@ return {
 				lspconfig[server].setup(opts)
 			end
 		end,
+	},
+	{
+		"yioneko/nvim-vtsls",
+		ft = {
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact",
+		},
+		dependencies = { "nvim-lspconfig" },
 	},
 }
