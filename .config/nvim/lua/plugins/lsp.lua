@@ -28,6 +28,7 @@ return {
         terraformls = {},
         yamlls = {},
         mdx_analyzer = {},
+        fsautocomplete = {},
       },
       setup = {
         ruff_lsp = function(_, opts)

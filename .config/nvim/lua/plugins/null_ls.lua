@@ -15,6 +15,7 @@ return {
               return utils.root_has_file(".prettierrc")
             end,
           }),
+          formatting.fantomas,
           formatting.yamlfix,
           formatting.stylua,
           diagnostics.mypy.with({ prefer_local = ".venv/bin" }),

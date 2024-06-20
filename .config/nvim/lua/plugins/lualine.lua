@@ -50,6 +50,24 @@ return {
         return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
       end
 
+      local function split(input, delimiter)
+        local arr = {}
+        _ = string.gsub(input, "[^" .. delimiter .. "]+", function(w)
+          table.insert(arr, w)
+        end)
+        return arr
+      end
+
+      local function get_venv()
+        local venv = vim.env.VIRTUAL_ENV
+        if venv then
+          local params = split(venv, "/")
+          return "(env:" .. params[#params - 1] .. ")"
+        else
+          return ""
+        end
+      end
+
       return {
         options = {
           theme = "catppuccin",
@@ -60,7 +78,7 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = { branch, diagnostics },
-          lualine_c = { filetype },
+          lualine_c = { get_venv, filetype },
           lualine_x = { diff, spaces, "encoding" },
           lualine_y = { location },
           lualine_z = { "progress" },

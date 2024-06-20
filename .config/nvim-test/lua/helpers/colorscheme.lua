@@ -15,11 +15,5 @@ local function get_if_available(name, opts)
 	return "default"
 end
 
--- Uncomment the colorscheme to use
 local colorscheme = get_if_available("catppuccin-macchiato")
--- local colorscheme = get_if_available('gruvbox')
--- local colorscheme = get_if_available('rose-pine')
--- local colorscheme = get_if_available('everforest')
--- local colorscheme = get_if_available('melange')
-
 return colorscheme
