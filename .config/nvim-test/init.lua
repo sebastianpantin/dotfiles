@@ -3,7 +3,7 @@ vim.g.python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
 require("core.lazy")
 
 -- General Neovim keymaps
-require("core.keymaps")
+--require("core.keymaps")
 
 -- Other options
 require("core.options")

@@ -23,38 +23,26 @@ require("helpers.keys").set_leader(" ")
 
 -- Load plugins from specifications
 -- (The leader key must be set before this)
-lazy.setup("plugins", {
-	defaults = { lazy = false },
-	ui = {
-		wrap = true,
-		size = { width = 1, height = 0.92 }, -- full sized, except statusline
+lazy.setup({
+	spec = {
+		{ import = "plugins" },
 	},
-	checker = {
-		enabled = true, -- automatically check for plugin updates
-		notify = false, -- done on my own to use minimum condition for less noise
-		frequency = 60 * 60 * 24, -- = 1 day
+	defaults = {
+		version = false,
 	},
-	diff = { cmd = "browser" }, -- view diffs with "d" in the browser
-	change_detection = { notify = false },
-	readme = { enabled = false },
-	install = { colorscheme = { "tokyonight", "catppuccin" } },
+	install = { colorscheme = { "catppuccin" } },
+	checker = { enabled = true, notify = false },
 	performance = {
 		rtp = {
-			-- disable unused builtin plugins from neovim
+			-- disable some rtp plugins
 			disabled_plugins = {
-				"man",
-				"matchparen",
-				"matchit",
-				"netrw",
-				"netrwPlugin",
 				"gzip",
-				"zip",
-				"tar",
+				-- "matchit",
+				-- "matchparen",
+				-- "netrwPlugin",
 				"tarPlugin",
-				"tutor",
-				"rplugin",
-				"health",
 				"tohtml",
+				"tutor",
 				"zipPlugin",
 			},
 		},
