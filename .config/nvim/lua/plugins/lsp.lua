@@ -70,7 +70,7 @@ return {
 
 				lsp_map("<leader>cr", vim.lsp.buf.rename, bufnr, "Rename symbol")
 				lsp_map("<leader>ca", vim.lsp.buf.code_action, bufnr, "Code action")
-				lsp_map("<leader>gy", vim.lsp.buf.type_definition, bufnr, "Type definition")
+				lsp_map("<leader>cy", vim.lsp.buf.type_definition, bufnr, "Type definition")
 				lsp_map("<leader>ls", telescope.lsp_document_symbols, bufnr, "Document symbols")
 
 				lsp_map("gd", telescope.lsp_definitions, bufnr, "Goto Definition")
@@ -99,9 +99,6 @@ return {
 					client.server_capabilities.hoverProvider = false
 				end
 
-				vim.notify(
-					"supports inlay hint " .. client.name .. " " .. tostring(client.supports_method("textDocument/inlayHint"))
-				)
 				if client.supports_method("textDocument/inlayHint") then
 					vim.g.inlay_hints_visible = true
 					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
