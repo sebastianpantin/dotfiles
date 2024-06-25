@@ -16,7 +16,7 @@ local opts = {
 	splitbelow = true,
 	splitright = true,
 	cursorline = true,
-	signcolumns = "yes",
+	signcolumn = "yes",
 	scrolloff = 0,
 	sidescrolloff = 8,
 }

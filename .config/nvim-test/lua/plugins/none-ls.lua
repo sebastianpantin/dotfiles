@@ -8,7 +8,8 @@ return {
     },
     config = function()
       require("mason-null-ls").setup({
-        ensure_installed = { "stylua", "prettier", "mypy", "fantomas", "yamlfix" }
+        ensure_installed = { "stylua", "prettierd", "mypy", "fantomas", "yamlfix" },
+        automatic_installation = true,
       })
     end,
   },
@@ -23,7 +24,7 @@ return {
       local diagnostics = nls.builtins.diagnostics -- to setup linters
       return {
         sources = {
-          formatting.prettier.with({
+          formatting.prettierd.with({
             condition = function(utils)
               return utils.root_has_file(".prettierrc")
             end,

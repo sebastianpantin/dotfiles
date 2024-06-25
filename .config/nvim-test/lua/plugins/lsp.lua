@@ -17,10 +17,6 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
-			{
-				"j-hui/fidget.nvim",
-				event = "LspAttach",
-			},
 			"folke/neodev.nvim",
 			"RRethy/vim-illuminate",
 			"hrsh7th/cmp-nvim-lsp",
@@ -39,28 +35,6 @@ return {
 			-- Neodev setup before LSP config
 			require("neodev").setup()
 
-			-- Turn on LSP status information
-			require("fidget").setup({
-				progress = {
-					display = {
-						overrides = {
-							fsautocomplete = {
-								name = "F# LSP",
-								update_hook = function(item)
-									require("fidget.notification").set_content_key(item)
-									if
-										(item.hidden == nil or item.hidden == false)
-										and string.match(item.annote, "Typechecking")
-									then
-										item.hidden = true
-									end
-								end,
-							},
-						},
-					},
-				},
-			})
-
 			-- Set up cool signs for diagnostics
 			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 			for type, icon in pairs(signs) do
@@ -70,9 +44,7 @@ return {
 
 			-- Diagnostic config
 			local config = {
-				virtual_text = {
-					source = true,
-				},
+				virtual_text = false,
 				signs = {
 					active = signs,
 				},
@@ -92,19 +64,17 @@ return {
 
 			-- This function gets run when an LSP connects to a particular buffer.
 			local on_attach = function(client, bufnr)
-				if client.name == "ruff_lsp" then
-					client.server_capabilities.hoverProvider = false
-				end
 				local lsp_map = require("helpers.keys").lsp_map
 				local lsp_utils = require("plugins.lspsettings.utils")
+				local telescope = require("telescope.builtin")
 
 				lsp_map("<leader>cr", vim.lsp.buf.rename, bufnr, "Rename symbol")
 				lsp_map("<leader>ca", vim.lsp.buf.code_action, bufnr, "Code action")
 				lsp_map("<leader>gy", vim.lsp.buf.type_definition, bufnr, "Type definition")
-				lsp_map("<leader>ls", require("telescope.builtin").lsp_document_symbols, bufnr, "Document symbols")
+				lsp_map("<leader>ls", telescope.lsp_document_symbols, bufnr, "Document symbols")
 
-				lsp_map("gd", vim.lsp.buf.definition, bufnr, "Goto Definition")
-				lsp_map("gr", require("telescope.builtin").lsp_references, bufnr, "Goto References")
+				lsp_map("gd", telescope.lsp_definitions, bufnr, "Goto Definition")
+				lsp_map("gr", telescope.lsp_references, bufnr, "Goto References")
 				lsp_map("gI", vim.lsp.buf.implementation, bufnr, "Goto Implementation")
 				lsp_map("K", vim.lsp.buf.hover, bufnr, "Hover Documentation")
 				lsp_map("gD", vim.lsp.buf.declaration, bufnr, "Goto Declaration")
@@ -117,11 +87,24 @@ return {
 				lsp_map("<leader>cf", "<cmd>Format<cr>", bufnr, "Format")
 
 				if client.name == "vtsls" then
+					client.server_capabilities.documentFormattingProvider = false
 					local ts_mappings = lsp_utils.generate_ts_mappings(client.name)
 					lsp_map("gd", ts_mappings.go_to_source_definition, bufnr, "Goto Definition")
-					lsp_map("mi", ts_mappings.add_missing_imports, bufnr, "Add missing imports")
-					lsp_map("oi", ts_mappings.organize_imports, bufnr, "Organize imports")
-					lsp_map("ri", ts_mappings.remove_unused_imports, bufnr, "Remove unused imports")
+					lsp_map("<leader>cmi", ts_mappings.add_missing_imports, bufnr, "Add missing imports")
+					lsp_map("<leader>coi", ts_mappings.organize_imports, bufnr, "Organize imports")
+					lsp_map("<leader>cri", ts_mappings.remove_unused_imports, bufnr, "Remove unused imports")
+				end
+
+				if client.name == "ruff_lsp" then
+					client.server_capabilities.hoverProvider = false
+				end
+
+				vim.notify(
+					"supports inlay hint " .. client.name .. " " .. tostring(client.supports_method("textDocument/inlayHint"))
+				)
+				if client.supports_method("textDocument/inlayHint") then
+					vim.g.inlay_hints_visible = true
+					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 				end
 
 				-- Attach and configure vim-illuminate

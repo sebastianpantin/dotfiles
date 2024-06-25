@@ -8,6 +8,32 @@ return {
 			large_file_overrides = {
 				providers = { "lsp" },
 			},
+			filetypes_denylist = {
+				"mason",
+				"harpoon",
+				"DressingInput",
+				"NeogitCommitMessage",
+				"qf",
+				"dirvish",
+				"oil",
+				"minifiles",
+				"fugitive",
+				"alpha",
+				"NvimTree",
+				"NeoTree",
+				"lazy",
+				"NeogitStatus",
+				"Trouble",
+				"netrw",
+				"lir",
+				"DiffviewFiles",
+				"Outline",
+				"Jaq",
+				"spectre_panel",
+				"toggleterm",
+				"DressingSelect",
+				"TelescopePrompt",
+			},
 		},
 		config = function(_, opts)
 			require("illuminate").configure(opts)
@@ -137,6 +163,7 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
+		event = "VeryLazy",
 		opts = {
 			exclude = {
 				filetypes = {
