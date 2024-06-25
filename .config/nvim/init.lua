@@ -1,3 +1,10 @@
--- bootstrap lazy.nvim, LazyVim and your plugins
 vim.g.python3_host_prog = "$HOME/.pyenv/versions/neovim3/bin/python"
-require("config.lazy")
+-- Handle plugins with lazy.nvim
+require("core.lazy")
+
+-- General Neovim keymaps
+require("core.keymaps")
+
+
+-- Other options
+require("core.options")
