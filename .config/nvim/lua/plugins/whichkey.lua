@@ -7,11 +7,11 @@ return {
 				plugins = {
 					marks = true,
 					registers = true,
-				  	spelling = {
+					spelling = {
 						enabled = true,
 						suggestions = 20,
-				  	},
-				  	presets = {
+					},
+					presets = {
 						operators = false,
 						motions = false,
 						text_objects = false,
@@ -19,25 +19,21 @@ return {
 						nav = false,
 						z = false,
 						g = false,
-				  	},
+					},
 				},
 			})
-			wk.register(
-				{
-					["<leader>"] = {
-						f = { name = "File" },
-						d = { name = "Delete/Close" },
-						q = { name = "Quit" },
-						s = { name = "Search" },
-						l = { name = "LSP" },
-						u = { name = "UI" },
-						b = { name = "Buffer" },
-						g = { name = "Git" },
-						c = { name = "Code" },
-						v = { "<cmd>vsplit<CR>", "Split" }
-					}
-				}
-			)
-		end
-	}
+			wk.add({
+				{ "<leader>b", group = "Buffer" },
+				{ "<leader>c", group = "Code" },
+				{ "<leader>d", group = "Delete/Close" },
+				{ "<leader>f", group = "File" },
+				{ "<leader>g", group = "Git" },
+				{ "<leader>l", group = "LSP" },
+				{ "<leader>q", group = "Quit" },
+				{ "<leader>s", group = "Search" },
+				{ "<leader>u", group = "UI" },
+				{ "<leader>v", "<cmd>vsplit<CR>",     desc = "Split" },
+			})
+		end,
+	},
 }

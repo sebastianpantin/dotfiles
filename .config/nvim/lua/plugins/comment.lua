@@ -1,6 +1,6 @@
 return {
 	{
-		"echasnovski/mini.nvim",
+		"echasnovski/mini.comment",
 		version = false,
 		dependencies = {
 			{
@@ -16,6 +16,8 @@ return {
 				end,
 			},
 		},
-		config = function() end,
+		config = function(_, opts)
+			require("mini.comment").setup(opts)
+		end,
 	},
 }
