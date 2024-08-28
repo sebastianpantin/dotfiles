@@ -2,13 +2,13 @@ return {
 	"nvimdev/dashboard-nvim",
 	event = "VimEnter",
 	config = function()
-		local logo = [[                     
-	███    ██ ███████  ██████  ██    ██ ██ ███    ███ 
-	████   ██ ██      ██    ██ ██    ██ ██ ████  ████ 
-	██ ██  ██ █████   ██    ██ ██    ██ ██ ██ ████ ██ 
-	██  ██ ██ ██      ██    ██  ██  ██  ██ ██  ██  ██ 
-	██   ████ ███████  ██████    ████   ██ ██      ██ 
-                                                  
+		local logo = [[
+	███    ██ ███████  ██████  ██    ██ ██ ███    ███
+	████   ██ ██      ██    ██ ██    ██ ██ ████  ████
+	██ ██  ██ █████   ██    ██ ██    ██ ██ ██ ████ ██
+	██  ██ ██ ██      ██    ██  ██  ██  ██ ██  ██  ██
+	██   ████ ███████  ██████    ████   ██ ██      ██
+
     ]]
 		logo = string.rep("\n", 8) .. logo .. "\n"
 		require("dashboard").setup({
@@ -20,6 +20,14 @@ return {
 				header = vim.split(logo, "\n"),
 				-- stylua: ignore
 				center = {
+					{
+						action = function()
+							vim.cmd("Telescope workspaces")
+						end,
+						desc = " Workspaces",
+						icon = " ",
+						key = "p"
+					},
 					{ action = require("telescope.builtin").find_files, desc = " Find File", icon = " ", key = "f" },
 					{ action = "ene | startinsert", desc = " New File", icon = " ", key = "n" },
 					{ action = require("telescope.builtin").oldfiles, desc = " Recent Files", icon = " ", key = "r" },

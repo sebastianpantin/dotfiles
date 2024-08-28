@@ -22,10 +22,10 @@ return {
 						show_nesting = {
 							["_"] = false,
 							json = true,
-							yaml = true
-						}
-					}
-				}
+							yaml = true,
+						},
+					},
+				},
 			})
 
 			pcall(require("telescope").load_extension, "fzf")
@@ -33,6 +33,7 @@ return {
 			local map = require("helpers.keys").map
 			map("n", "<leader>fr", require("telescope.builtin").oldfiles, "Recently opened")
 			map("n", "<leader>ff", require("telescope.builtin").find_files, "Files")
+			map("n", "<leader>fp", ":Telescope workspaces <CR>", "Workspaces")
 			map("n", "<leader>sh", require("telescope.builtin").help_tags, "Help")
 			map("n", "<leader>sw", require("telescope.builtin").grep_string, "Current word")
 			map("n", "<leader>sg", require("telescope.builtin").live_grep, "Grep")
