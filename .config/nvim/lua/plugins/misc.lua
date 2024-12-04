@@ -40,6 +40,22 @@ return {
 		end,
 	},
 	{
+		"NvChad/nvim-colorizer.lua",
+		event = "BufReadPost",
+		config = function()
+			local colorizer_status_ok, colorizer = pcall(require, "colorizer")
+			if not colorizer_status_ok then
+				print("colorizer not found!")
+			end
+			colorizer.setup({
+				user_default_options = {
+					css = true,
+				},
+			})
+		end,
+		lazy = true,
+	},
+	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		dependencies = {
@@ -145,6 +161,9 @@ return {
 		event = "VeryLazy",
 		opts = {
 			lsp = {
+				progress = {
+					enabled = false,
+				},
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 					["vim.lsp.util.stylize_markdown"] = true,
