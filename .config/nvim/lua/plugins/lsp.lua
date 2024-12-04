@@ -1,7 +1,7 @@
 local servers = {
 	"lua_ls",
 	"pylsp",
-	"ruff_lsp",
+	"ruff",
 	"csharp_ls",
 	"dockerls",
 	"terraformls",
@@ -23,7 +23,9 @@ return {
 		},
 		config = function()
 			-- Set up Mason before anything else
-			require("mason").setup()
+			require("mason").setup({
+				ensure_installed = { "codelldb" },
+			})
 			require("mason-lspconfig").setup({
 				ensure_installed = servers,
 				automatic_installation = true,
@@ -95,7 +97,7 @@ return {
 					lsp_map("<leader>cri", ts_mappings.remove_unused_imports, bufnr, "Remove unused imports")
 				end
 
-				if client.name == "ruff_lsp" then
+				if client.name == "ruff" then
 					client.server_capabilities.hoverProvider = false
 				end
 
