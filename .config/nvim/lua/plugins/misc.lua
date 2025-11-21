@@ -170,6 +170,32 @@ return {
 					["cmp.entry.get_documentation"] = true,
 				},
 			},
+			routes = {
+				{
+					filter = {
+						event = "msg_show",
+						any = {
+							{ find = "position_encoding param is required" },
+							{ find = "Defaulting to position encoding" },
+							{ find = "multiple different client offset_encodings" },
+							{ find = "jump_to_location" },
+						},
+					},
+					opts = { skip = true },
+				},
+				{
+					filter = {
+						event = "notify",
+						any = {
+							{ find = "position_encoding param is required" },
+							{ find = "Defaulting to position encoding" },
+							{ find = "multiple different client offset_encodings" },
+							{ find = "jump_to_location" },
+						},
+					},
+					opts = { skip = true },
+				},
+			},
 			presets = {
 				bottom_search = true, -- use a classic bottom cmdline for search
 				command_palette = true, -- position the cmdline and popupmenu together

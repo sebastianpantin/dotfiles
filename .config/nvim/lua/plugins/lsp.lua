@@ -36,19 +36,16 @@ return {
 
 			-- Neodev setup before LSP config
 			require("neodev").setup()
-
-			-- Set up cool signs for diagnostics
-			local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-			for type, icon in pairs(signs) do
-				local hl = "DiagnosticSign" .. type
-				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-			end
-
 			-- Diagnostic config
 			local config = {
 				virtual_text = false,
 				signs = {
-					active = signs,
+					text = {
+						[vim.diagnostic.severity.ERROR] = " ",
+						[vim.diagnostic.severity.WARN] = " ",
+						[vim.diagnostic.severity.HINT] = " ",
+						[vim.diagnostic.severity.INFO] = " ",
+					},
 				},
 				update_in_insert = false,
 				underline = true,
@@ -90,38 +87,28 @@ return {
 
 				if client.name == "vtsls" then
 					client.server_capabilities.documentFormattingProvider = false
-					local ts_mappings = lsp_utils.generate_ts_mappings(client.name)
-					lsp_map("gd", ts_mappings.go_to_source_definition, bufnr, "Goto Definition")
-					lsp_map("<leader>cmi", ts_mappings.add_missing_imports, bufnr, "Add missing imports")
-					lsp_map("<leader>coi", ts_mappings.organize_imports, bufnr, "Organize imports")
-					lsp_map("<leader>cri", ts_mappings.remove_unused_imports, bufnr, "Remove unused imports")
 				end
 
 				if client.name == "ruff" then
 					client.server_capabilities.hoverProvider = false
 				end
 
-				if client.supports_method("textDocument/inlayHint") then
+				if client:supports_method("textDocument/inlayHint") then
 					vim.g.inlay_hints_visible = true
-					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+					vim.lsp.inlay_hint.enable(bufnr, true)
 				end
 
-				-- Attach and configure vim-illuminate
-				require("illuminate").on_attach(client)
-			end
+			-- Attach and configure vim-illuminate
+			require("illuminate").on_attach(client)
+		end
 
-			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+		-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
+		capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-			local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-			if not lspconfig_status_ok then
-				return
-			end
-
-			for _, server in pairs(servers) do
+		-- Use new vim.lsp.config API for Neovim 0.11+
+		for _, server in pairs(servers) do
 				local opts = {
-					on_attach = on_attach,
 					capabilities = capabilities,
 				}
 
@@ -132,7 +119,27 @@ return {
 					opts = vim.tbl_deep_extend("force", conf_opts, opts)
 				end
 
-				lspconfig[server].setup(opts)
+				if vim.lsp.config then
+					-- Use new API for Neovim 0.11+
+					vim.lsp.config(server, opts)
+					
+					-- Set up autocmd to attach when LSP connects
+					vim.api.nvim_create_autocmd("LspAttach", {
+						callback = function(args)
+							local client = vim.lsp.get_client_by_id(args.data.client_id)
+							if client and client.name == server then
+								on_attach(client, args.buf)
+							end
+						end,
+					})
+				else
+					-- Fallback for older Neovim versions
+					opts.on_attach = on_attach
+					local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
+					if lspconfig_status_ok then
+						lspconfig[server].setup(opts)
+					end
+				end
 			end
 		end,
 	},
