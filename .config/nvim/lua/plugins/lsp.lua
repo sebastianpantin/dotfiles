@@ -87,18 +87,18 @@ return {
 
 				if client.name == "vtsls" then
 					client.server_capabilities.documentFormattingProvider = false
-				end
+			end
 
-				if client.name == "ruff" then
-					client.server_capabilities.hoverProvider = false
-				end
+			if client.name == "ruff" then
+				client.server_capabilities.hoverProvider = false
+			end
 
-				if client:supports_method("textDocument/inlayHint") then
-					vim.g.inlay_hints_visible = true
-					vim.lsp.inlay_hint.enable(bufnr, true)
-				end
+			if client:supports_method("textDocument/inlayHint") then
+				vim.g.inlay_hints_visible = true
+				vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+			end
 
-			-- Attach and configure vim-illuminate
+		-- Attach and configure vim-illuminate
 			require("illuminate").on_attach(client)
 		end
 
