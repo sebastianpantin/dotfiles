@@ -8,7 +8,6 @@ return {
 			map("n", "<leader>gb", "<cmd>Gitsigns blame_line<cr>", "Blame")
 			map("n", "<leader>gba", "<cmd>Gitsigns blame<cr>", "Blame all rows")
 
-
 			require("gitsigns").setup({
 				watch_gitdir = {
 					interval = 1000,

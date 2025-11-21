@@ -109,13 +109,13 @@ return {
 				},
 				window = {
 					completion = {
-						border = "rounded",
+						border = require("core.constants").border_style,
 						scrollbar = false,
 					},
 					documentation = {
-						border = "rounded",
-					}
-				}
+						border = require("core.constants").border_style,
+					},
+				},
 			})
 		end,
 	},

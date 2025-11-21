@@ -10,6 +10,7 @@ return {
 			require("telescope").load_extension("aerial")
 			require("telescope").setup({
 				defaults = {
+					preview = false,
 					mappings = {
 						i = {
 							["<C-u>"] = false,
@@ -30,17 +31,8 @@ return {
 
 			pcall(require("telescope").load_extension, "fzf")
 
-			local map = require("helpers.keys").map
-			map("n", "<leader>fr", require("telescope.builtin").oldfiles, "Recently opened")
-			map("n", "<leader>ff", require("telescope.builtin").find_files, "Files")
-			map("n", "<leader>fp", ":Telescope workspaces <CR>", "Workspaces")
-			map("n", "<leader>sh", require("telescope.builtin").help_tags, "Help")
-			map("n", "<leader>sw", require("telescope.builtin").grep_string, "Current word")
-			map("n", "<leader>sg", require("telescope.builtin").live_grep, "Grep")
-			map("n", "<leader>fs", ":Telescope aerial <CR>", "Symbols")
-			map("n", "<leader>sd", require("telescope.builtin").diagnostics, "Diagnostics")
-
-			map("n", "<C-p>", require("telescope.builtin").keymaps, "Search keymaps")
+			-- Load keymaps from separate module for easier maintenance
+			require("core.telescope_keymaps").setup()
 		end,
 	},
 }

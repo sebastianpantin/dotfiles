@@ -2,7 +2,7 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-        build = ":CatppuccinCompile",
+		build = ":CatppuccinCompile",
 		opts = {
 			setup = {
 				flavour = "macchiato", -- latte, frappe, macchiato, mocha

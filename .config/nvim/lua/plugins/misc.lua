@@ -1,3 +1,5 @@
+local constants = require("core.constants")
+
 return {
 	{
 		"RRethy/vim-illuminate",
@@ -8,32 +10,7 @@ return {
 			large_file_overrides = {
 				providers = { "lsp" },
 			},
-			filetypes_denylist = {
-				"mason",
-				"harpoon",
-				"DressingInput",
-				"NeogitCommitMessage",
-				"qf",
-				"dirvish",
-				"oil",
-				"minifiles",
-				"fugitive",
-				"alpha",
-				"NvimTree",
-				"NeoTree",
-				"lazy",
-				"NeogitStatus",
-				"Trouble",
-				"netrw",
-				"lir",
-				"DiffviewFiles",
-				"Outline",
-				"Jaq",
-				"spectre_panel",
-				"toggleterm",
-				"DressingSelect",
-				"TelescopePrompt",
-			},
+			filetypes_denylist = constants.excluded_filetypes,
 		},
 		config = function(_, opts)
 			require("illuminate").configure(opts)
@@ -211,17 +188,8 @@ return {
 		event = "VeryLazy",
 		opts = {
 			exclude = {
-				filetypes = {
-					"help",
-					"startify",
-					"dashboard",
-					"lazy",
-					"neogitstatus",
-					"NvimTree",
-					"Trouble",
-					"text",
-				},
-				buftypes = { "terminal", "nofile" },
+				filetypes = constants.excluded_filetypes,
+				buftypes = constants.excluded_buftypes,
 			},
 			indent = {
 				char = "│",

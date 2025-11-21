@@ -32,7 +32,7 @@ return {
 				{ "<leader>q", group = "Quit" },
 				{ "<leader>s", group = "Search" },
 				{ "<leader>u", group = "UI" },
-				{ "<leader>v", "<cmd>vsplit<CR>",     desc = "Split" },
+				{ "<leader>v", "<cmd>vsplit<CR>", desc = "Split" },
 			})
 		end,
 	},
