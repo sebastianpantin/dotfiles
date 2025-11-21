@@ -1,6 +1,9 @@
 command_timeout = 1000
 palette = "catppuccin_macchiato"
 
+[git_status]
+disabled = true
+
 [aws]
 symbol = "  "
 
